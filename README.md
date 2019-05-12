@@ -1,5 +1,5 @@
 # Nauka Pisania
-Gra do wspomagająca proces nauki pisania i czytania.  
+Gra wspomagająca proces nauki pisania i czytania.  
 
 Na ekranie pojawia się losowe słowo ze słownika, które należy wpisać w okno poniżej słowa. Każda wciśnięta litera jest wypowiadana. Zatwierdzenie wprowadzone słowa klawiszem ENTER porównuje wpisane słowo z tym podanym i jeśli jest poprawne to przechodzi do nastepnego losowego słowa. W przeciwnym wypadku jest wypowiedziana informacja o błędzie.
 
