@@ -1,0 +1,84 @@
+<html>
+    <body>
+        <h1>PISANIE</h1>
+        <p>ENTER - zatwierdza wpisane słowo</p>
+        <p>SPACE - wypowiada słowo do wpisania</p>
+        <p>SHIFT - wypowiada wpisane słowo</p>
+        <br>
+        <h2 id="word"></h2>
+        <input type="text" id="text" style="text-transform:uppercase"/>
+        <script src="slownik.js"></script>
+        <script>
+            function setRandomWord() {
+                var randomNumber = Math.floor(Math.random() * (words.length));
+                var text = words[randomNumber];
+                document.getElementById('word').dataset.word = text;
+                document.getElementById('word').innerText = text.toUpperCase();
+                say(text);
+            }
+
+            function say(text) {
+                var msg = new SpeechSynthesisUtterance(text);
+                window.speechSynthesis.speak(msg);
+            }
+
+            function playSampleWord() {
+                var text = document.getElementById('word').dataset.word;
+                say(text);
+            }
+
+            function playTypedWord() {
+                var text = document.getElementById('text').value;
+                say(text);
+            }
+
+            function keyPressed(key) {
+                say(key);
+            }
+
+            function check() {
+                var sampleWord = document.getElementById('word').dataset.word.toUpperCase();
+                var typedWord = document.getElementById('text').value.toUpperCase();
+                say(typedWord);
+                if(sampleWord == typedWord) {
+                    correct();
+                } else {
+                    wrong();
+                }
+            }
+
+            function correct() {
+                say('Bardzo dobrze!');
+                setRandomWord();
+                document.getElementById('text').value = '';
+            }
+
+            function wrong() {
+                say('Źle. Popraw!');
+            }
+
+            document.getElementById('text').onkeypress = function(e) {
+                return (e.keyCode != 32);
+            }
+
+            document.body.onkeyup = function(e){
+               if(e.keyCode == 32) {
+                   playSampleWord();
+               } if(e.keyCode == 8) {
+                    //do nothing
+               } else
+               if(e.keyCode == 16) {
+                    playTypedWord()
+               } else
+               if(e.keyCode == 13) {
+                    check();
+               } else {
+                   keyPressed(e.key);
+               }
+            }
+
+            setRandomWord()
+        </script>
+    </body>
+
+</html>
